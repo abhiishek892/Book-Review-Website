@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Panel - Book Review</title>
+    <link rel="stylesheet" href="discussion.css">
+    <script>
+        // JavaScript functionality for the discussion panel
+        document.addEventListener("DOMContentLoaded", () => {
+            // Add a reply dynamically
+            const replyButtons = document.querySelectorAll(".reply-btn");
+            replyButtons.forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    const replyForm = event.target.parentElement;
+                    const textarea = replyForm.querySelector("textarea");
+                    const replyContent = textarea.value.trim();
+
+                    if (replyContent) {
+                        // Create new reply elements
+                        const newReply = document.createElement("div");
+                        newReply.classList.add("reply");
+
+                        newReply.innerHTML = `
+                            <div class="user-avatar">
+                                <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="User Avatar">
+                            </div>
+                            <div class="reply-info">
+                                <p class="user-name">You</p>
+                                <p class="reply-date">${new Date().toLocaleDateString()}</p>
+                                <p class="reply-content">${replyContent}</p>
+                            </div>
+                        `;
+
+                        // Add the new reply to the replies section
+                        const repliesSection = replyForm.parentElement.querySelector(".replies");
+                        repliesSection.appendChild(newReply);
+
+                        // Clear the textarea
+                        textarea.value = "";
+                    } else {
+                        alert("Please write something before replying!");
+                    }
+                });
+            });
+
+            // Like button functionality
+            const discussionPosts = document.querySelectorAll(".discussion-post");
+            discussionPosts.forEach((post) => {
+                const likeButton = document.createElement("button");
+                likeButton.classList.add("like-btn");
+                likeButton.textContent = "Like (0)";
+                post.appendChild(likeButton);
+
+                let likeCount = 0;
+                likeButton.addEventListener("click", () => {
+                    likeCount++;
+                    likeButton.textContent = `Like (${likeCount})`;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <!-- Discussion Panel -->
+    <div class="discussion-panel">
+        <h1>Discussion Panel</h1>
+
+        <!-- First Discussion Post -->
+        <div class="discussion-post">
+            <div class="post-header">
+                <div class="user-avatar">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Avatar">
+                </div>
+                <div class="user-info">
+                    <p class="user-name">JohnDoe</p>
+                    <p class="post-date">December 19, 2024</p>
+                </div>
+            </div>
+            <p class="post-content">
+                I just finished reading "The Silent Watcher"! What a gripping mystery. Highly recommend it!
+            </p>
+
+            <!-- Replies -->
+            <div class="replies">
+                <div class="reply">
+                    <div class="user-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="User Avatar">
+                    </div>
+                    <div class="reply-info">
+                        <p class="user-name">SarahW</p>
+                        <p class="reply-date">December 20, 2024</p>
+                        <p class="reply-content">
+                            I agree! The twist at the end was amazing. Couldn't have predicted that.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reply Form -->
+            <div class="reply-form">
+                <textarea placeholder="Write a reply..." rows="2"></textarea>
+                <button class="reply-btn">Reply</button>
+            </div>
+        </div>
+
+        <!-- Second Discussion Post -->
+        <div class="discussion-post">
+            <div class="post-header">
+                <div class="user-avatar">
+                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User Avatar">
+                </div>
+                <div class="user-info">
+                    <p class="user-name">BookLover99</p>
+                    <p class="post-date">December 18, 2024</p>
+                </div>
+            </div>
+            <p class="post-content">
+                Has anyone read "Into the Void"? I found the world-building to be incredible!
+            </p>
+
+            <!-- Replies -->
+            <div class="replies">
+                <div class="reply">
+                    <div class="user-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User Avatar">
+                    </div>
+                    <div class="reply-info">
+                        <p class="user-name">LiteraryExpert</p>
+                        <p class="reply-date">December 19, 2024</p>
+                        <p class="reply-content">
+                            I loved the world-building too! The landscapes were described so vividly. It really felt like I was there.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reply Form -->
+            <div class="reply-form">
+                <textarea placeholder="Write a reply..." rows="2"></textarea>
+                <button class="reply-btn">Reply</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
